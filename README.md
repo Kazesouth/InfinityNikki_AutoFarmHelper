@@ -15,7 +15,9 @@ git clone https://github.com/Kazesouth/InfinityNikki_AutoFarmHelper
 <img width="352" height="832" alt="QQ20260514-223013" src="https://github.com/user-attachments/assets/612d34db-e633-4b5b-b748-1cb991f35230" />\
 4.在运行脚本程序之前，需要将家园的田地按照下图摆放（摆放成长条，周围用墙或木板灯障碍物围起来），并调整好视角。\
 同时确保已切换种植能力，并持有足够多的种子。\
-<img width="1442" height="907" alt="QQ20260514-200033" src="https://github.com/user-attachments/assets/30862011-7d32-49b4-916a-bb90661fb366" />
+<img width="1442" height="912" alt="QQ20260514-231042" src="https://github.com/user-attachments/assets/eab562cf-8793-4bcd-bf40-5bebb217b11c" />\
+<img width="1442" height="911" alt="QQ20260514-231105" src="https://github.com/user-attachments/assets/b145f0c8-6ce1-409f-b757-f4c4609acd0b" />\
+<img width="1442" height="915" alt="QQ20260514-231128" src="https://github.com/user-attachments/assets/c493313e-eec7-4f77-9143-073fac0c6411" />
 \
 这样摆放↑\
 <img width="1442" height="912" alt="QQ20260514-200722" src="https://github.com/user-attachments/assets/b1a285c4-5e99-43e2-a5d2-e75972d5bc53" />
@@ -41,9 +43,9 @@ git clone https://github.com/Kazesouth/InfinityNikki_AutoFarmHelper
 
 - **技术原理**：本软件仅通过屏幕截图与图像识别判断游戏状态，并模拟键盘、鼠标输入进行操作，**完全不涉及**游戏客户端的内存读写、修改、注入、逆向等任何可能破坏游戏安全性的行为。尽管如此，自动化模拟输入仍有可能被游戏安全系统识别为违规操作。
 - **风险提示**：使用本软件可能违反《无限暖暖》游戏的相关服务条款、用户协议或公平游戏政策，可能导致游戏账号被警告、限制、封禁或其他处罚。使用者应充分了解并**自行承担**使用本软件带来的一切风险与后果。
-- **责任豁免**：本软件的开发者（及贡献者）不对因使用或滥用本软件造成的任何直接或间接损失负责，包括但不限于游戏账号封禁、虚拟财产损失、计算机系统损坏、数据丢失等。一旦使用本软件，即视为您已**接受全部风险**并同意免除开发者的一切责任。
+- **责任豁免**：本软件的开发者（本人）不对因使用或滥用本软件造成的任何直接或间接损失负责，包括但不限于游戏账号封禁、虚拟财产损失、计算机系统损坏、数据丢失等。一旦使用本软件，即视为您已**接受全部风险**并同意免除开发者的一切责任。
 - **第三方权利**：《无限暖暖》（Infinity Nikki）及相关游戏素材、商标、角色等权益均归**上海叠纸网络科技有限公司**所有。本软件为第三方开源项目，与官方游戏公司无任何关联，也未获得官方授权或背书。
-- **合规使用**：请尊重游戏开发者的劳动成果，支持正版游戏。开发者**不鼓励**任何违反游戏规则的使用方式，强烈建议仅在游戏官方允许的范围内、或使用离线/私服学习环境运行本软件。
+- **合规使用**：请尊重游戏开发者的劳动成果，支持正版游戏。本人**不鼓励**任何违反游戏规则的使用方式，强烈建议仅在游戏官方允许的范围内、或使用离线/私服学习环境运行本软件。
 
 ## English Disclaimer
 
@@ -51,6 +53,6 @@ This project (the "Software") is an open-source automation tool based on visual 
 
 - **Technical Principle**: The Software only performs screen capture, image recognition, and simulation of keyboard/mouse inputs. It does **NOT** involve any reading, writing, modification, injection, or reverse engineering of the game's memory. Nevertheless, automated input simulation may still be detected by the game's security system as a policy violation.
 - **Risk Warning**: Using this Software may violate the Terms of Service, End User License Agreement, or fair play policies of *Infinity Nikki*, and could result in warnings, restrictions, or permanent bans of your game account. All risks and consequences arising from the use of this Software shall be **borne solely by the user**.
-- **Limitation of Liability**: The developer(s) and contributors of this Software shall not be held liable for any direct or indirect damages caused by the use or misuse of the Software, including but not limited to game account bans, loss of virtual property, computer system damage, or data loss. By using this Software, you acknowledge that you have **accepted all risks** and agree to release the developer(s) from any liability.
+- **Limitation of Liability**: The developer(s) and contributors（me） of this Software shall not be held liable for any direct or indirect damages caused by the use or misuse of the Software, including but not limited to game account bans, loss of virtual property, computer system damage, or data loss. By using this Software, you acknowledge that you have **accepted all risks** and agree to release the developer(s) from any liability.
 - **Third-Party Rights**: *Infinity Nikki* and all related game materials, trademarks, and characters are the property of **Shanghai Folding Paper Technology Co., Ltd** (叠纸科技). This project is an independent third-party open-source project and is not affiliated with, authorized, or endorsed by the official game company.
 - **Compliant Usage**: Please respect the game developers and support the official release. The developer(s) do **not** encourage any use that violates game rules. It is strongly recommended to use this Software only within officially permitted scenarios, or in offline/private server environments for educational purposes.
