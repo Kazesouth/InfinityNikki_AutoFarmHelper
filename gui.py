@@ -11,8 +11,8 @@ from worker import FarmWorker
 class FarmGUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("无限暖暖家园种植小助手 v1.48")
-        self.resize(320, 800)
+        self.setWindowTitle("无限暖暖家园种植小助手 v1.8")
+        self.resize(350, 800)
         self.setMinimumSize(100, 200)
         self.setMaximumSize(960, 1000)
         
