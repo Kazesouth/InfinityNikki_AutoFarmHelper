@@ -1,24 +1,22 @@
-import sys
 import os
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QComboBox, QLineEdit, 
                              QCheckBox, QPushButton, QTextEdit, QGroupBox)
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 
+from config_manager import get_base_path, ASSET_FOLDER
 from worker import FarmWorker
-import config_manager as cm
 
 class FarmGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("无限暖暖家园种植小助手 v1.48")
-        self.resize(350, 750)
+        self.resize(320, 800)
         self.setMinimumSize(100, 200)
         self.setMaximumSize(960, 1000)
         
-        base_path = cm.get_base_path()
-        icon_path = os.path.join(base_path, cm.ASSET_FOLDER, 'logo.ico')
+        icon_path = os.path.join(get_base_path(), ASSET_FOLDER, 'logo.ico')
         if os.path.exists(icon_path):
             self.setWindowIcon(QIcon(icon_path))
         
@@ -81,8 +79,17 @@ class FarmGUI(QMainWindow):
 
         self.chk_sleep = QCheckBox("开启电脑睡眠模式（推荐）")
         self.chk_sleep.setChecked(True)
+        self.chk_sleep.clicked.connect(self.on_sleep_clicked) 
         setting_layout.addWidget(self.chk_sleep)
-        setting_layout.addWidget(QLabel("*若无法唤醒，取消勾选即可切换为【仅关闭屏幕】模式"))
+        
+        self.chk_ingame_afk = QCheckBox("游戏内挂机等待成熟（仅对类型1和2生效）")
+        self.chk_ingame_afk.setChecked(False)
+        self.chk_ingame_afk.clicked.connect(self.on_ingame_afk_clicked) 
+        setting_layout.addWidget(self.chk_ingame_afk)
+        
+        note_label = QLabel("*取消勾选以上任一模式，即可切换至【仅关闭屏幕】模式")
+        note_label.setStyleSheet("color: black; font-size: 12px;")
+        setting_layout.addWidget(note_label)
         
         self.chk_water = QCheckBox("启用后续自动浇水（仅对类型3-7生效）")
         self.chk_water.setEnabled(False) 
@@ -121,18 +128,35 @@ class FarmGUI(QMainWindow):
         main_layout.addWidget(log_group)
 
         # 5. 底部署名
-        footer = QLabel("by 辰风")
+        footer = QLabel("B站@南风Kaze丶")
         footer.setAlignment(Qt.AlignCenter)
         footer.setStyleSheet("color: gray; font-size: 12px;")
         main_layout.addWidget(footer)
+    
+    def on_sleep_clicked(self):
+        if self.chk_sleep.isChecked():
+            self.chk_ingame_afk.setChecked(False)
+            
+    def on_ingame_afk_clicked(self):
+        if self.chk_ingame_afk.isChecked():
+            self.chk_sleep.setChecked(False)
 
     def on_crop_changed(self):
         key = self.combo_crop.currentData()
+        
         if int(key) >= 3:
             self.chk_water.setEnabled(True)
         else:
             self.chk_water.setChecked(False)
             self.chk_water.setEnabled(False)
+        
+        if int(key) <= 2:
+            self.chk_ingame_afk.setEnabled(True)
+        else:
+            self.chk_ingame_afk.setChecked(False)
+            self.chk_ingame_afk.setEnabled(False)
+            if not self.chk_sleep.isChecked():
+                self.chk_sleep.setChecked(True)
 
     def start_farm(self):
         try:
@@ -148,11 +172,20 @@ class FarmGUI(QMainWindow):
         
         water_count = 0
         final_wait = initial_wait
+
         if self.chk_water.isChecked():
-            # 注意：这里的 60 应与 config 中的 WATER_COOLDOWN_MINUTES 保持概念一致
-            # 但 GUI 中先用硬编码 60 估算次数
-            water_count = initial_wait // 60 
-            final_wait = initial_wait % 60
+            remaining_time = initial_wait
+            calculated_water_count = 0
+            water_cooldown = 60  
+            water_reduction = 20 
+
+            while remaining_time > water_cooldown:
+                remaining_time -= water_cooldown    
+                calculated_water_count += 1         
+                remaining_time -= water_reduction   
+            
+            water_count = calculated_water_count
+            final_wait = max(0, remaining_time)
 
         settings = {
             'crop_choice': crop_key,
@@ -161,7 +194,8 @@ class FarmGUI(QMainWindow):
             'enable_water': self.chk_water.isChecked(),
             'water_count': water_count,
             'final_wait': final_wait,
-            'enable_sleep': self.chk_sleep.isChecked()
+            'enable_sleep': self.chk_sleep.isChecked(),
+            'enable_ingame_afk': self.chk_ingame_afk.isChecked() 
         }
 
         self.worker = FarmWorker(settings)
@@ -178,6 +212,7 @@ class FarmGUI(QMainWindow):
         self.combo_crop.setEnabled(False)
         self.input_loop.setEnabled(False)
         self.chk_sleep.setEnabled(False)
+        self.chk_ingame_afk.setEnabled(False) 
         self.chk_water.setEnabled(False)
 
     def stop_farm(self):
@@ -195,6 +230,12 @@ class FarmGUI(QMainWindow):
         self.combo_crop.setEnabled(True)
         self.input_loop.setEnabled(True)
         self.chk_sleep.setEnabled(True)
+        crop_key = self.combo_crop.currentData()
+        if int(crop_key) <= 2:
+            self.chk_ingame_afk.setEnabled(True)
+        else:
+            self.chk_ingame_afk.setEnabled(False)
+            
         self.on_crop_changed() 
         self.log_message("脚本已停止。", "red")
 

@@ -1,19 +1,16 @@
 import sys
-import ctypes
 from PyQt5.QtWidgets import QApplication
-from gui import FarmGUI
+
 import system_ops
+from gui import FarmGUI
 
 if __name__ == "__main__":
-    # 设置 Windows 任务栏图标 ID
-    try:
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("ChenFeng.NikkiFarmhelper.v1.48")
-    except:
-        pass
+    # 配置底部的标识，便于在Windows任务栏统一图标
+    system_ops.set_app_model_id("ChenFeng.NikkiFarmhelper.v1.48")
     
-    # 设置 DPI 感知 (防止高分屏模糊)
+    # 强制让程序感知高清DPI屏幕缩放
     system_ops.set_dpi_awareness()
-
+    
     app = QApplication(sys.argv)
     window = FarmGUI()
     window.show()
