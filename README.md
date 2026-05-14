@@ -25,6 +25,14 @@ git clone https://github.com/Kazesouth/InfinityNikki_AutoFarmHelper
 确认配置后就可以开始运行脚本了。\
 初次运行会生成json5配置文件（记事本打开）和log日志文件。
 
+## 注意：
+1.部分杀毒软件会直接拦截软件或拦截鼠标键盘模拟输入，使用此脚本软件前请关闭杀毒软件或将脚本软件添加至白名单。\
+2.【开启睡眠模式】和【仅关闭屏幕模式】需要设置电脑从睡眠中唤醒时无须登录：\
+打开**电脑设置→帐户→登录选项→需要登录→选择“从不”**。\
+并在控制面板里开启“**允许使用唤醒定时器**”：\
+打开**控制面板→系统和安全→电源选项→更改计划设置→更改高级电源设置→找到“睡眠”→允许使用唤醒定时器→（2个选项全部启用）**
+
+
 # 免责声明 / Disclaimer
 
 ## 中文声明
@@ -44,5 +52,5 @@ This project (the "Software") is an open-source automation tool based on visual 
 - **Technical Principle**: The Software only performs screen capture, image recognition, and simulation of keyboard/mouse inputs. It does **NOT** involve any reading, writing, modification, injection, or reverse engineering of the game's memory. Nevertheless, automated input simulation may still be detected by the game's security system as a policy violation.
 - **Risk Warning**: Using this Software may violate the Terms of Service, End User License Agreement, or fair play policies of *Infinity Nikki*, and could result in warnings, restrictions, or permanent bans of your game account. All risks and consequences arising from the use of this Software shall be **borne solely by the user**.
 - **Limitation of Liability**: The developer(s) and contributors of this Software shall not be held liable for any direct or indirect damages caused by the use or misuse of the Software, including but not limited to game account bans, loss of virtual property, computer system damage, or data loss. By using this Software, you acknowledge that you have **accepted all risks** and agree to release the developer(s) from any liability.
-- **Third-Party Rights**: *Infinity Nikki* and all related game materials, trademarks, and characters are the property of **Shanghai Papergames Network Technology Co., Ltd.** (叠纸网络). This project is an independent third-party open-source project and is not affiliated with, authorized, or endorsed by the official game company.
+- **Third-Party Rights**: *Infinity Nikki* and all related game materials, trademarks, and characters are the property of **Shanghai Folding Paper Technology Co., Ltd** (叠纸科技). This project is an independent third-party open-source project and is not affiliated with, authorized, or endorsed by the official game company.
 - **Compliant Usage**: Please respect the game developers and support the official release. The developer(s) do **not** encourage any use that violates game rules. It is strongly recommended to use this Software only within officially permitted scenarios, or in offline/private server environments for educational purposes.
