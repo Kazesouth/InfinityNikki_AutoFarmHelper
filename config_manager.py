@@ -46,7 +46,7 @@ DEFAULT_CONFIG = {
         "wall_front": ['wall_front_01.png', 'wall_front_02.png', 'wall_front_03.png', 'wall_front_04.png', 'wall_front_05.png', 'wall_front_06.png', 'wall_front_07.png', 'wall_front_08.png'],
         "wall_back": ['wall_back_01.png', 'wall_back_02.png', 'wall_back_03.png', 'wall_back_04.png', 'wall_back_05.png', 'wall_back_06.png', 'wall_back_07.png', 'wall_back_08.png'],
         "launcher_start": ['btn_launcher_start_01.png', 'btn_launcher_start_02.png', 'btn_launcher_start_03.png', 'btn_launcher_start_04.png'],
-        "click_enter": ['click_enter_01.png', 'click_enter_02.png', 'click_enter_03.png', 'click_enter_04.png'],
+        "click_enter": ['click_enter_01.png', 'click_enter_02.png', 'click_enter_03.png', 'click_enter_04.png', "click_enter_05.png", "click_enter_06.png"],
         "loading": ['mark_loading_01.png', 'mark_loading_02.png', 'mark_loading_03.png', 'mark_loading_04.png'],
         "mature": ['mark_mature_01.png', 'mark_mature_02.png', 'mark_mature_03.png', 'mark_mature_04.png'],
         "exit_icon": ['btn_exit_icon_01.png', 'btn_exit_icon_02.png', 'btn_exit_icon_03.png', 'btn_exit_icon_04.png'],
@@ -54,39 +54,82 @@ DEFAULT_CONFIG = {
     }
 }
 
+# 带有全部详细注释的 JSON5 模板字符串
 DEFAULT_CONFIG_CONTENT = """{
     // === 基础超时设置 (单位: 秒) ===
+    // 浇水冷却时间 (分钟)，即每次浇水后的挂机等待时间
     "WATER_COOLDOWN_MINUTES": 60,
+    // 单次完整种植循环内收获、浇水的超时保护
     "TIMEOUT_FARMING_LOOP": 35,
+    // 播种动作的超时保护
     "TIMEOUT_PLANTING": 13,
+    // 角色归位/回正的超时保护
     "TIMEOUT_HOMING": 10,
+    // 果树模式下的归位超时
     "TIMEOUT_FRUIT_HOMING": 13,
+    // 果树播种超时
     "TIMEOUT_FRUIT_PLANT": 15,
+    // 果树浇水超时
     "TIMEOUT_FRUIT_WATER": 40,
+
+    // === 系统与网络设置 ===
+    // 网络/系统恢复缓冲时间 (秒)，用于睡眠唤醒后的等待
     "NETWORK_RECOVERY_BUFFER": 10,
+    // 启动游戏最大等待时间 (秒)
     "TIMEOUT_ENTER_GAME_MAX": 360,
+    // 启动器恢复等待时间 (秒)
     "TIMEOUT_LAUNCHER_RESTORE": 300,
+    // 加载画面卡死判断时间 (秒)
     "TIMEOUT_LOADING_STUCK": 90,
+
+    // === 图像识别阈值 (0.1 - 1.0) ===
+    // 点击操作的置信度阈值 (越低越容易误点，越高越难识别)
     "CLICK_CONFIDENCE_THRESHOLD": 0.6,
+    // 仅检查是否存在时的置信度阈值
     "CHECK_CONFIDENCE_THRESHOLD": 0.7,
+    // 启动器按钮识别置信度
     "LAUNCHER_CONFIDENCE": 0.6,
+
+    // === 动作时间随机区间配置 [最小值, 最大值] (单位: 秒) ===
+    // 用于模拟拟人化操作的随机延迟
     "ACTION_TIMINGS": {
+        // 果树浇水时的移动步长
         "move_step_water_fruit": [0.5, 0.8],
+        // 普通作物浇水时的移动步长
         "move_step_water_normal": [0.4, 0.45],
+        // 收获时的移动步长
         "move_step_harvest": [0.4, 0.45],
+        // 果树播种时的移动步长
         "move_step_plant_fruit": [1.4, 2.4],
+        // 普通作物播种时的移动步长
         "move_step_plant_normal": [1.4, 1.8],
+        
+        // 果树浇水后的动作间隔
         "wait_after_water_fruit": [0.3, 0.5],
+        // 普通作物浇水后的动作间隔
         "wait_after_water_normal": [0.15, 0.35],
+        // 收获后的动作间隔
         "wait_after_harvest": [0.2, 0.35],
+        // 播种后的动作间隔
         "wait_after_plant": [0.5, 0.8],
+        
+        // 鼠标右键蓄力时间 (浇水蓄力)
         "water_hold_duration": [0.15, 0.3],
+        // 短按键时长 (如转身调整)
         "key_press_short": [0.15, 0.25],
+        // 转身时长 (W/S)
         "key_press_turn": [0.1, 0.2],
+        
+        // 短休眠 (0.5s左右)
         "sleep_short": [0.4, 0.6],
+        // 中休眠 (1.0s左右)
         "sleep_medium": [0.8, 1.2],
+        // 长休眠 (2.0s左右)
         "sleep_long": [1.8, 2.3]
     },
+
+    // === 图片模板路径配置 ===
+    // 对应 imgs 文件夹下的文件名列表
     "templates": {
         "launcher_window": ["launcher_window_01.png", "launcher_window_02.png", "launcher_window_03.png", "launcher_window_04.png", "launcher_window_05.png", "launcher_window_06.png", "launcher_window_07.png", "launcher_window_08.png"],
         "game_logo": ["game_logo_01.png", "game_logo_02.png", "game_logo_03.png", "game_logo_04.png", "game_logo_05.png", "game_logo_06.png"],
@@ -95,7 +138,7 @@ DEFAULT_CONFIG_CONTENT = """{
         "wall_front": ["wall_front_01.png", "wall_front_02.png", "wall_front_03.png", "wall_front_04.png", "wall_front_05.png", "wall_front_06.png", "wall_front_07.png", "wall_front_08.png"],
         "wall_back": ["wall_back_01.png", "wall_back_02.png", "wall_back_03.png", "wall_back_04.png", "wall_back_05.png", "wall_back_06.png", "wall_back_07.png", "wall_back_08.png"],
         "launcher_start": ["btn_launcher_start_01.png", "btn_launcher_start_02.png", "btn_launcher_start_03.png", "btn_launcher_start_04.png"],
-        "click_enter": ["click_enter_01.png", "click_enter_02.png", "click_enter_03.png", "click_enter_04.png"],
+        "click_enter": ["click_enter_01.png", "click_enter_02.png", "click_enter_03.png", "click_enter_04.png", "click_enter_05.png", "click_enter_06.png"],
         "loading": ["mark_loading_01.png", "mark_loading_02.png", "mark_loading_03.png", "mark_loading_04.png"],
         "mature": ["mark_mature_01.png", "mark_mature_02.png", "mark_mature_03.png", "mark_mature_04.png"],
         "exit_icon": ["btn_exit_icon_01.png", "btn_exit_icon_02.png", "btn_exit_icon_03.png", "btn_exit_icon_04.png"],
@@ -139,8 +182,10 @@ def load_and_validate_config(log_func=None):
     else:
         if log_func: log_func("未检测到配置文件，将生成默认配置。", "blue")
 
-    # 3. 回写 (确保格式完整或生成新文件)
+    # 3. 回写 (确保格式完整或生成带注释的新文件)
     try:
+        # 仅当文件不存在时，才会使用带注释的字符串模板生成新文件
+        # 如果文件已存在，则只在内存中合并配置以运行，不对原文件执行覆写，以防把用户的注释洗掉
         if not file_exists:
             with open(config_path, 'w', encoding='utf-8') as f:
                 f.write(DEFAULT_CONFIG_CONTENT)
